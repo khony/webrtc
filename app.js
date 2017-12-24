@@ -71,7 +71,6 @@ io.sockets.on('connection', function(socket) {
       socket.join(room);
       console.log('Client ID ' + socket.id + ' created room ' + room);
       socket.emit('created', room, socket.id);
-      // io.sockets.socket(socket.id).emit('function','offer');
     } else if (numClients === 1) {
       socket.join(room);
       console.log('Client ID ' + socket.id + ' joined room ' + room);

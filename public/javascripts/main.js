@@ -199,12 +199,6 @@ function hangup() {
   start();
 }
 
-if (localStorage.getItem("myfunction"+room) == "offer"){
-  setTimeout(function(){ 
-    call();}
-    , 3000
-  );
-}
 
 var socket = io.connect();
 
@@ -228,7 +222,6 @@ socket.on('ready', function(_socket){
   if (_socket.id != socket.id) {
     console.log('ready received');
     setTimeout(function(){ 
-      localStorage.setItem("myfunction"+room, "offer");
       call(); 
     }, 5000);
   }
