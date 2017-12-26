@@ -92,6 +92,13 @@ function gotStream(stream) {
 start();
 function start(){
   pc1 = new RTCPeerConnection(servers);
+  trace('Created local peer connection object pc1');
+  pc1.onicecandidate = function(e) {
+    onIceCandidate(pc1, e);
+  };
+  pc1.oniceconnectionstatechange = function(e) {
+    onIceStateChange(pc1, e);
+  };
   navigator.mediaDevices.getUserMedia({
     audio: true,
     video: true
@@ -113,13 +120,6 @@ function call() {
   if (audioTracks.length > 0) {
     trace('Using audio device: ' + audioTracks[0].label);
   }
-  trace('Created local peer connection object pc1');
-  pc1.onicecandidate = function(e) {
-    onIceCandidate(pc1, e);
-  };
-  pc1.oniceconnectionstatechange = function(e) {
-    onIceStateChange(pc1, e);
-  };
   trace('Added local stream to pc1');
   trace('pc1 createOffer start');
   pc1.createOffer(
